@@ -19,6 +19,9 @@ public class Recipe {
     @Column(nullable = false)
     private String method;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     public Recipe() {
     }
 
@@ -52,5 +55,13 @@ public class Recipe {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
