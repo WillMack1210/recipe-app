@@ -18,4 +18,35 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    public Recipe createRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
+    public Recipe getRecipeById(Long id) {
+        return recipeRepository.findById(id).orElse(null);
+    }
+
+    public Recipe updateRecipe(Long id, Recipe updatedRecipe) {
+        Recipe existingRecipe = recipeRepository.findById(id).orElse(null);
+        if (existingRecipe != null) {
+            existingRecipe.setName(updatedRecipe.getName());
+            existingRecipe.setIngredients(updatedRecipe.getIngredients());
+            existingRecipe.setMethod(updatedRecipe.getMethod());
+            return recipeRepository.save(existingRecipe);
+        }
+        return null;
+    }
+
+    public void deleteRecipe(Long id) {
+        recipeRepository.deleteById(id);
+    }
+
+    public List<Recipe> searchRecipes(String query) {
+        return recipeRepository.findByNameContainingIgnoreCase(query);
+    }
+
+    public List<Recipe> getRecipesByIngredient(String ingredient) {
+        return recipeRepository.findByIngredientsContainingIgnoreCase(ingredient);
+    }
+
 }
